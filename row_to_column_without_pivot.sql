@@ -33,3 +33,22 @@ group by emp_id
 -- here we need values at emp_id level, so group by emp_id. Now group by wants an aggregate and hence sum(case...)
 -- this is an extremely important scenario very important in interviews
 
+-- Now unpivot this
+
+Select emp_id,'salary' as sal_comp, salary as val from emp_compensation_pivot
+union all
+Select emp_id,'bonus' as sal_comp, bonus as val from emp_compensation_pivot
+union all
+Select emp_id,'hike_percent' as sal_comp, salary as val from emp_compensation_pivot
+
+
+-- if you want in an ordered manner
+
+Select * from(
+Select emp_id,'salary' as sal_comp, salary as val from emp_compensation_pivot
+union all
+Select emp_id,'bonus' as sal_comp, bonus as val from emp_compensation_pivot
+union all
+Select emp_id,'hike_percent' as sal_comp, salary as val from emp_compensation_pivot
+)a
+order by emp_id
